@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using Application.Features.Brands.Profiles;
+using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
@@ -7,6 +9,8 @@ public static class ApplicationServiceRegistration
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+
+        services.AddAutoMapper(ex => ex.AddMaps(Assembly.GetExecutingAssembly()));
         services.AddMediatR(configuration =>
         {
             configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
