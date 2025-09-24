@@ -8,7 +8,7 @@ namespace Application.Features.Brands.Commands.Create;
 
 public class CreateBrandCommand : IRequest<CreatedBrandResponse>
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
 
     public class CreateBrandCommandHandler : IRequestHandler<CreateBrandCommand, CreatedBrandResponse>
@@ -22,7 +22,7 @@ public class CreateBrandCommand : IRequest<CreatedBrandResponse>
             _mapper = mapper;
         }
 
-        public async Task<CreatedBrandResponse>? Handle(CreateBrandCommand request, CancellationToken cancellationToken)
+        public async Task<CreatedBrandResponse> Handle(CreateBrandCommand request, CancellationToken cancellationToken)
         {
             var brand = _mapper.Map<Brand>(request);
             brand.Id = Guid.NewGuid();
