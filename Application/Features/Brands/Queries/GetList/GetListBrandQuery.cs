@@ -31,7 +31,7 @@ public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandListItemDt
             var brands = await _brandRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
-                withDeleted: true,
+                withDeleted: false,
                 cancellationToken: cancellationToken
             );
 

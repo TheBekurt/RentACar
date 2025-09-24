@@ -19,7 +19,7 @@ public class GetByIdBrandQuery : IRequest<GetByIdBrandResponse>
         }
         public async Task<GetByIdBrandResponse> Handle(GetByIdBrandQuery request, CancellationToken cancellationToken)
         {
-            var brand = await _brandRepository.GetAsync(b => b.Id == request.Id, withDeleted: true,cancellationToken: cancellationToken);
+            var brand = await _brandRepository.GetAsync(b => b.Id == request.Id, withDeleted: false,cancellationToken: cancellationToken);
             return _mapper.Map<GetByIdBrandResponse>(brand);
         }
     }
