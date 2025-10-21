@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
+using Core.Application.Pipelines.Validation;
 using Core.Application.Rules;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
@@ -10,9 +12,15 @@ public static class ApplicationServiceRegistration
     {
         services.AddSubclassOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+
+
         services.AddMediatR(configuration =>
         {
             configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
         });
 
 
